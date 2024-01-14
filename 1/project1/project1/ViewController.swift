@@ -12,6 +12,7 @@ import UIKit
         override func viewDidLoad() {
             super.viewDidLoad()
             view.backgroundColor = .white
+            button1.addTarget(self, action: #selector(tap), for: .touchUpInside)
             setupUI()
         }
 
@@ -101,10 +102,31 @@ import UIKit
             ])
         }
     }
-
-#Preview{
-    ViewController()
+private extension ViewController {
+    @objc func tap() {
+        let tab1 = UINavigationController(rootViewController: FriendsView())
+        let tab2 = UINavigationController(rootViewController: GroupsView())
+        let tab3 = UINavigationController(rootViewController: PhotosView(collectionViewLayout: UICollectionViewFlowLayout()))
+        
+        tab1.tabBarItem.title = "Friendssssss"
+        tab2.tabBarItem.title = "Groups"
+        tab3.tabBarItem.title = "Photos"
+        
+        
+        let arrayOfTabs = [tab1, tab2, tab3]
+        let tapBarController = UITabBarController()
+        tapBarController.viewControllers = arrayOfTabs
+        
+        guard let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let firstWindow = firstScene.windows.first else {
+                  return
+              }
+        firstWindow.rootViewController = tapBarController
+    }
 }
+//#Preview{
+//    ViewController()
+//}
 
 
 

@@ -12,6 +12,12 @@
 		9B2E207E2B434862005AD0E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E207D2B434862005AD0E5 /* ViewController.swift */; };
 		9B2E20832B434864005AD0E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B2E20822B434864005AD0E5 /* Assets.xcassets */; };
 		9B2E20862B434864005AD0E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2E20842B434864005AD0E5 /* LaunchScreen.storyboard */; };
+		9B4BA0722B529842005747BF /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4BA0712B529842005747BF /* FriendsView.swift */; };
+		9B4BA0742B529861005747BF /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4BA0732B529861005747BF /* GroupsView.swift */; };
+		9B4BA0762B52988B005747BF /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4BA0752B52988B005747BF /* CustomTableCell.swift */; };
+		9B4BA0782B5298BE005747BF /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4BA0772B5298BE005747BF /* PhotosView.swift */; };
+		9B4BA07C2B52B83B005747BF /* CustomCellForGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4BA07B2B52B83B005747BF /* CustomCellForGroups.swift */; };
+		9B72E8852B52E400002976F5 /* CustomCellPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B72E8842B52E400002976F5 /* CustomCellPhotos.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		9B2E20822B434864005AD0E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B2E20852B434864005AD0E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B2E20872B434864005AD0E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B4BA0712B529842005747BF /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendsView.swift; path = ../FriendsView.swift; sourceTree = "<group>"; };
+		9B4BA0732B529861005747BF /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GroupsView.swift; path = ../GroupsView.swift; sourceTree = "<group>"; };
+		9B4BA0752B52988B005747BF /* CustomTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTableCell.swift; path = ../CustomTableCell.swift; sourceTree = "<group>"; };
+		9B4BA0772B5298BE005747BF /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotosView.swift; path = ../PhotosView.swift; sourceTree = "<group>"; };
+		9B4BA07B2B52B83B005747BF /* CustomCellForGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellForGroups.swift; sourceTree = "<group>"; };
+		9B72E8842B52E400002976F5 /* CustomCellPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellPhotos.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +72,12 @@
 				9B2E20822B434864005AD0E5 /* Assets.xcassets */,
 				9B2E20842B434864005AD0E5 /* LaunchScreen.storyboard */,
 				9B2E20872B434864005AD0E5 /* Info.plist */,
+				9B4BA0712B529842005747BF /* FriendsView.swift */,
+				9B4BA0732B529861005747BF /* GroupsView.swift */,
+				9B4BA0772B5298BE005747BF /* PhotosView.swift */,
+				9B4BA0752B52988B005747BF /* CustomTableCell.swift */,
+				9B4BA07B2B52B83B005747BF /* CustomCellForGroups.swift */,
+				9B72E8842B52E400002976F5 /* CustomCellPhotos.swift */,
 			);
 			path = project1;
 			sourceTree = "<group>";
@@ -134,9 +152,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B4BA0722B529842005747BF /* FriendsView.swift in Sources */,
 				9B2E207E2B434862005AD0E5 /* ViewController.swift in Sources */,
 				9B2E207A2B434862005AD0E5 /* AppDelegate.swift in Sources */,
+				9B4BA0782B5298BE005747BF /* PhotosView.swift in Sources */,
 				9B2E207C2B434862005AD0E5 /* SceneDelegate.swift in Sources */,
+				9B4BA0742B529861005747BF /* GroupsView.swift in Sources */,
+				9B4BA07C2B52B83B005747BF /* CustomCellForGroups.swift in Sources */,
+				9B4BA0762B52988B005747BF /* CustomTableCell.swift in Sources */,
+				9B72E8852B52E400002976F5 /* CustomCellPhotos.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
