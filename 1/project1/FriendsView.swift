@@ -15,7 +15,7 @@ class FriendsView: UITableViewController{
         1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        CustomTableCell()
+        FriendsTableCell()
     }
 }
 //#Preview{

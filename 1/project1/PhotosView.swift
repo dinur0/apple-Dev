@@ -26,7 +26,8 @@ class PhotosView: UICollectionViewController{
     }
     
 }
-
+/*
+*/
 extension PhotosView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

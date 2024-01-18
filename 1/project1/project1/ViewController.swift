@@ -6,104 +6,37 @@
 //
 
 import UIKit
+import WebKit
 
     class ViewController: UIViewController{
 
         override func viewDidLoad() {
             super.viewDidLoad()
             view.backgroundColor = .white
-            button1.addTarget(self, action: #selector(tap), for: .touchUpInside)
+            guard let url = URL(string: "https://oauth.vk.com/authorize?client_id=51835022&redirect_uri=http://example.com/callback&scope=262150&display=mobile") else { return }
+            MyWeb.load(URLRequest(url: url))
             setupUI()
         }
-
-        private var image1: UIImageView = {
-            let image = UIImageView(image: UIImage(systemName: "person"))
-//            image.frame = CGRect(x: 50, y: 400, width: 200, height: 200)
-            image.backgroundColor = .yellow
-            return image
-        }()
         
-        private var text1: UITextField = {
-            let text = UITextField()
-            text.backgroundColor = .gray
-            text.textAlignment = .center
-            text.text = "Логин"
-            return text
-        }()
-        
-        private var text2: UITextField = {
-            let text = UITextField()
-            text.backgroundColor = .brown
-            text.textAlignment = .center
-            text.text = "Пароль"
-            return text
+        private lazy var MyWeb: WKWebView = {
+            let MyWeb = WKWebView(frame: view.bounds)
+            MyWeb.navigationDelegate = self
+            return MyWeb
         }()
 
-        private var label1: UILabel = {
-            let label = UILabel()
-            label.text = "Авторизация"
-            label.textAlignment = .center
-            label.textColor = .black
-            label.backgroundColor = .green
-            return label
-        }()
-
-        private var button1 = UIButton()
-        
-        private func addButton(){
-            button1.setTitle ("Войти", for: .normal)
-            button1.setTitleColor(.darkGray, for: .normal)
-            button1.backgroundColor = .yellow
-        }
 
         private func setupUI() {
-            addButton()
-            view.addSubview(image1)
-            view.addSubview(label1)
-            view.addSubview(button1)
-            view.addSubview(text1)
-            view.addSubview(text2)
-            addConstrains()
+            view.addSubview(MyWeb)
+//            addConstrains()
         }
 
-        private func addConstrains() {
-            label1.translatesAutoresizingMaskIntoConstraints = false
-            button1.translatesAutoresizingMaskIntoConstraints = false
-            text1.translatesAutoresizingMaskIntoConstraints = false
-            text2.translatesAutoresizingMaskIntoConstraints = false
-            image1.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                
-                image1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                image1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-                image1.widthAnchor.constraint(equalToConstant: view.frame.size.width*0.75),
-                image1.heightAnchor.constraint(equalToConstant: view.frame.size.height*0.20),
-
-                label1.topAnchor.constraint(equalTo: image1.bottomAnchor, constant: 10),
-                label1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                label1.widthAnchor.constraint(equalToConstant: view.frame.size.width*0.9),
-                label1.heightAnchor.constraint(equalToConstant: view.frame.size.height*0.05),
-                
-                text1.topAnchor.constraint(equalTo: label1.bottomAnchor, constant: 10),
-                text1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                text1.widthAnchor.constraint(equalToConstant: view.frame.size.width*0.6),
-                text1.heightAnchor.constraint(equalToConstant: view.frame.size.height*0.05),
-                
-                text2.topAnchor.constraint(equalTo: text1.bottomAnchor, constant: 10),
-                text2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                text2.widthAnchor.constraint(equalToConstant: view.frame.size.width*0.6),
-                text2.heightAnchor.constraint(equalToConstant: view.frame.size.height*0.05),
-                
-                button1.topAnchor.constraint(equalTo: text2.bottomAnchor, constant: 10),
-                button1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                button1.widthAnchor.constraint(equalToConstant: view.frame.size.width*0.9	),
-                button1.heightAnchor.constraint(equalToConstant: view.frame.size.height*0.07),
-            ])
-        }
+//        private func addConstrains() {
+//            NSLayoutConstraint.activate([
+//            ])
+//        }
     }
 private extension ViewController {
-    @objc func tap() {
+    func tap() {
         let tab1 = UINavigationController(rootViewController: FriendsView())
         let tab2 = UINavigationController(rootViewController: GroupsView())
         let tab3 = UINavigationController(rootViewController: PhotosView(collectionViewLayout: UICollectionViewFlowLayout()))
@@ -123,6 +56,31 @@ private extension ViewController {
               }
         firstWindow.rootViewController = tapBarController
     }
+}
+
+extension ViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void){
+            guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment else {
+                    decisionHandler(.allow)
+                    return
+                    }
+                let params = fragment
+                    .components(separatedBy: "&")
+                    .map { $0.components(separatedBy: "=")}
+                    .reduce([String: String]()) {result, parameter in
+                        var dictionary = result
+                        let key = parameter[0]
+                        let value = parameter[1]
+                        dictionary[key] = value
+                        return dictionary
+                }
+        NetworkServiceClass.networkToken = params["access_token"]!
+        decisionHandler(.cancel)
+        webView.removeFromSuperview()
+        tap()
+    }
+
 }
 //#Preview{
 //    ViewController()

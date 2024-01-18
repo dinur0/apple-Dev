@@ -18,6 +18,6 @@ class GroupsView: UITableViewController{
         CustomCellForGroups()
     }
 }
-#Preview{
-    GroupsView()
-}
+//#Preview{
+//    GroupsView()
+//}

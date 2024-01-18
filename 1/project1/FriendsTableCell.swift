@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomCellForGroups: UITableViewCell{
+class FriendsTableCell: UITableViewCell{
     
     private var label: UILabel = {
         let label = UILabel()
@@ -15,24 +15,16 @@ class CustomCellForGroups: UITableViewCell{
         label.textAlignment = .center
         return label
     }()
-    
-    private var label2: UILabel = {
-        let label2 = UILabel()
-        label2.text = "Description"
-        label2.textAlignment = .center
-        return label2
-    }()
 
     private var pictureInCell: UIImageView = {
         let pictureInCell = UIImageView()
-        pictureInCell.backgroundColor = .red
+        pictureInCell.backgroundColor = .orange
         pictureInCell.layer.cornerRadius = 25
         return pictureInCell
     }()
     
     func setup(){
         contentView.addSubview(label)
-        contentView.addSubview(label2)
         contentView.addSubview(pictureInCell)
     }
     
@@ -49,7 +41,6 @@ class CustomCellForGroups: UITableViewCell{
     
     private func addConstraints() {
         label.translatesAutoresizingMaskIntoConstraints = false
-        label2.translatesAutoresizingMaskIntoConstraints = false
         pictureInCell.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -59,19 +50,13 @@ class CustomCellForGroups: UITableViewCell{
             pictureInCell.heightAnchor.constraint(equalToConstant: 40),
             pictureInCell.widthAnchor.constraint(equalTo: pictureInCell.heightAnchor, constant: 20),
             
-            label.topAnchor.constraint(equalTo: pictureInCell.topAnchor),
+            label.topAnchor.constraint(equalTo: pictureInCell.topAnchor, constant: 0),
             label.leftAnchor.constraint(equalTo: pictureInCell.rightAnchor, constant: 0),
             label.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
-            
-            label2.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
-            label2.leftAnchor.constraint(equalTo: label.leftAnchor),
-            label2.rightAnchor.constraint(equalTo: label.rightAnchor),
-            label2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
-            
-            
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50)
         ])
     }
 }
 //#Preview{
-//    GroupsView()
+//    FriendsView()
 //}
