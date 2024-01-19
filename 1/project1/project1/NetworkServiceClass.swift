@@ -24,14 +24,11 @@ final class NetworkServiceClass {
                 return
             }
             do {
-                let friendsData = try JSONDecoder().decode(FriendsStructure.self, from: data)
+                let friendsData = try JSONDecoder().decode([FriendsStructure].self, from: data)
                 print(friendsData)
             } catch {
                 print(error)
             }
         }.resume()
-        
     }
-    
-    
 }

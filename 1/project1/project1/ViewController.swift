@@ -9,8 +9,7 @@ import UIKit
 import WebKit
 
     class ViewController: UIViewController{
-        
-//        let net = NetworkServiceClass()
+               
 //        func net.showFriends()
 
         override func viewDidLoad() {
