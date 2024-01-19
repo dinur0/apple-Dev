@@ -15,9 +15,11 @@ final class NetworkServiceClass {
     static var networkToken = ""
     
     func showFriends(){
-        guard let url = URL(string: "https://api.vk.com/method/friends.get?fields=photo_100&access_token=\(NetworkServiceClass.networkToken)&v=5.131") else {
+        guard let url = URL(string: "https://api.vk.com/method/friends.get?fields=photo_100&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
+        else {
             return
         }
+        print(url)
         
         thisSession.dataTask(with: url) { (data, _, error) in
             guard let data else{
@@ -25,6 +27,7 @@ final class NetworkServiceClass {
             }
             do {
                 let friendsData = try JSONDecoder().decode([FriendsStructure].self, from: data)
+                print()
                 print(friendsData)
             } catch {
                 print(error)

@@ -5,12 +5,10 @@
 //  Created by хех on 18.01.2024.
 //
 
-import Foundation
-import UIKit
 
 struct FriendsStructure: Decodable{
 
-    let name: String
-    let photo: String
-    
+    let photo_100: String
+    let first_name: String
+    let last_name: String
 }
