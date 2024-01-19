@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 struct FriendsStructure: Decodable{
-//    var name
-//    var photo
+
+    let name: String
+    let photo: String
     
 }

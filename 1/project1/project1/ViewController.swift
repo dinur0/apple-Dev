@@ -9,11 +9,14 @@ import UIKit
 import WebKit
 
     class ViewController: UIViewController{
+        
+//        let net = NetworkServiceClass()
+//        func net.showFriends()
 
         override func viewDidLoad() {
             super.viewDidLoad()
             view.backgroundColor = .white
-            guard let url = URL(string: "https://oauth.vk.com/authorize?client_id=51835022&redirect_uri=http://example.com/callback&scope=262150&display=mobile") else { return }
+            guard let url = URL(string: "https://oauth.vk.com/authorize?client_id=51835022&redirect_uri=https://oauth.vk.com/blank.html&scope=262150&display=mobile&response_type=token") else { return }
             MyWeb.load(URLRequest(url: url))
             setupUI()
         }

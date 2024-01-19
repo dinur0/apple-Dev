@@ -19,16 +19,17 @@ final class NetworkServiceClass {
             return
         }
         
-        thisSession.dataTask(with: url) { (data, _, error,) in
+        thisSession.dataTask(with: url) { (data, _, error) in
             guard let data else{
                 return
             }
             do {
                 let friendsData = try JSONDecoder().decode(FriendsStructure.self, from: data)
+                print(friendsData)
             } catch {
                 print(error)
             }
-        }
+        }.resume()
         
     }
     
