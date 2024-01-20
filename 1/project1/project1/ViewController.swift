@@ -9,8 +9,6 @@ import UIKit
 import WebKit
 
     class ViewController: UIViewController{
-               
-//        func net.showFriends()
 
         override func viewDidLoad() {
             super.viewDidLoad()

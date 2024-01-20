@@ -2,13 +2,13 @@ import UIKit
 
 class FriendsView: UITableViewController{
     
-    let net = NetworkServiceClass()
+    let netFriends = NetworkServiceClass()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Friends"
         view.backgroundColor = #colorLiteral(red: 0.4338220026, green: 0.4338220026, blue: 0.4338220026, alpha: 1)
-        net.showFriends()
+//        netFriends.showFriends()
         
     }
     

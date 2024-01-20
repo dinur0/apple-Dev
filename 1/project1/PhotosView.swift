@@ -9,6 +9,8 @@ import UIKit
 
 class PhotosView: UICollectionViewController{
     
+    let photosNet = NetworkServiceClass()
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
@@ -18,6 +20,7 @@ class PhotosView: UICollectionViewController{
         title = "Photos"
         collectionView.backgroundColor = .blue
         collectionView.register(CustomCellPhotos.self, forCellWithReuseIdentifier: "thisCell")
+        photosNet.showPhotos()
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

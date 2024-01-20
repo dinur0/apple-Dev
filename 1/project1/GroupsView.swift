@@ -2,10 +2,14 @@ import UIKit
 
 class GroupsView: UITableViewController{
     
+    let groupsNet = NetworkServiceClass()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Groups"
         view.backgroundColor = #colorLiteral(red: 0.4338220026, green: 0.4338220026, blue: 0.4338220026, alpha: 1)
+//        groupsNet.showGroups()
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
