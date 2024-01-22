@@ -9,10 +9,20 @@ import UIKit
 
 final class CustomCellPhotos: UICollectionViewCell{
     
-    private let cell = UIImageView(image: UIImage(systemName: "pencil"))
+    private var cell = UIImageView(image: UIImage(systemName: "pencil"))
     
     private func setupUI(){
         contentView.addSubview(cell)
+    }
+    
+    func updateValues(photosModel: Jpg) {//JPG ----------------------------
+        DispatchQueue.global().async{
+            if let photoUrl = URL(string: photosModel.url ?? "error"), let data = try? Data(contentsOf: photoUrl) {
+                DispatchQueue.main.async {
+                    self.cell.image = UIImage(data: data)
+                }
+            }
+        }
     }
     
     override init(frame: CGRect) {

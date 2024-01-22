@@ -14,19 +14,19 @@ import WebKit
             super.viewDidLoad()
             view.backgroundColor = .white
             guard let url = URL(string: "https://oauth.vk.com/authorize?client_id=51835022&redirect_uri=https://oauth.vk.com/blank.html&scope=262150&display=mobile&response_type=token") else { return }
-            MyWeb.load(URLRequest(url: url))
+            myWeb.load(URLRequest(url: url))
             setupUI()
         }
         
-        private lazy var MyWeb: WKWebView = {
-            let MyWeb = WKWebView(frame: view.bounds)
-            MyWeb.navigationDelegate = self
-            return MyWeb
+        private lazy var myWeb: WKWebView = {
+            let myWeb = WKWebView(frame: view.bounds)
+            myWeb.navigationDelegate = self
+            return myWeb
         }()
 
 
         private func setupUI() {
-            view.addSubview(MyWeb)
+            view.addSubview(myWeb)
 //            addConstrains()
         }
 

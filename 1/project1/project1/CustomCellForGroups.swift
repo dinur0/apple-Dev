@@ -20,6 +20,7 @@ class CustomCellForGroups: UITableViewCell{
         let label2 = UILabel()
         label2.text = "Description"
         label2.textAlignment = .center
+        label2.backgroundColor = .white
         return label2
     }()
 
@@ -29,6 +30,19 @@ class CustomCellForGroups: UITableViewCell{
         pictureInCell.layer.cornerRadius = 25
         return pictureInCell
     }()
+    
+    func updateValues(groupsModel: Group) {
+        label.text = groupsModel.name ?? "без названия"
+        label2.text = groupsModel.description ?? "без описания"
+        DispatchQueue.global().async{
+            if let photoUrl = URL(string: groupsModel.photo50 ?? "error"), let data = try? Data(contentsOf: photoUrl) {
+                DispatchQueue.main.async {
+                    self.pictureInCell.image = UIImage(data: data)
+                }
+            }
+        }
+        
+    }
     
     func setup(){
         contentView.addSubview(label)

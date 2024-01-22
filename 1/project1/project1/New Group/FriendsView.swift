@@ -1,19 +1,18 @@
 import UIKit
 
-class GroupsView: UITableViewController{
+class FriendsView: UITableViewController{
     
-    private var model: [Group] = []
+    let netFriends = NetworkServiceClass()
     
-    let groupsNet = NetworkServiceClass()
+    private var model: [Friend] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Groups"
+        title = "Friends"
         view.backgroundColor = #colorLiteral(red: 0.4338220026, green: 0.4338220026, blue: 0.4338220026, alpha: 1)
-//        groupsNet.showGroups()
-        tableView.register(CustomCellForGroups.self, forCellReuseIdentifier: "GRCell")
-        groupsNet.showGroups{ [weak self] arrayOfGroups in
-            self?.model = arrayOfGroups
+        tableView.register(FriendsTableCell.self, forCellReuseIdentifier: "FRCell")
+        netFriends.showFriends{ [weak self] arrayOfFriends in
+            self?.model = arrayOfFriends
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -28,14 +27,15 @@ class GroupsView: UITableViewController{
         model.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "GRCell", for: indexPath) as? CustomCellForGroups else {
-            return CustomCellForGroups()
+//        FriendsTableCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FRCell", for: indexPath) as? FriendsTableCell else {
+            return FriendsTableCell()
         }
-        let downloadedGroups = model[indexPath.row]
-        cell.updateValues(groupsModel: downloadedGroups)
+        let downloadedFriends = model[indexPath.row]
+        cell.updateValues(friendsModel: downloadedFriends)
         return cell
     }
 }
 //#Preview{
-//    GroupsView()
+//    FriendsView()
 //}

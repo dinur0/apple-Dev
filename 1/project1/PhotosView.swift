@@ -9,10 +9,12 @@ import UIKit
 
 class PhotosView: UICollectionViewController{
     
+    private var model: [Jpg] = []
+    
     let photosNet = NetworkServiceClass()
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        model.count
     }
     
     override func viewDidLoad() {
@@ -20,13 +22,25 @@ class PhotosView: UICollectionViewController{
         title = "Photos"
         collectionView.backgroundColor = .blue
         collectionView.register(CustomCellPhotos.self, forCellWithReuseIdentifier: "thisCell")
-        photosNet.showPhotos()
+//        photosNet.showPhotos()
+        photosNet.showPhotos{ [weak self] arrayOfPhotos in
+            self?.model = arrayOfPhotos
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "thisCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "thisCell", for: indexPath) as? CustomCellPhotos else {
+            return CustomCellPhotos()
+        }
+//        return cell
+       
+        let downloadedPhotos = model[indexPath.row]
+        cell.updateValues(photosModel: downloadedPhotos)
         return cell
-    }
+        }
     
 }
 /*

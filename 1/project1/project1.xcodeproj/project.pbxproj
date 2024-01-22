@@ -32,7 +32,7 @@
 		9B2E20822B434864005AD0E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B2E20852B434864005AD0E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B2E20872B434864005AD0E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9B4BA0712B529842005747BF /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendsView.swift; path = ../FriendsView.swift; sourceTree = "<group>"; };
+		9B4BA0712B529842005747BF /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendsView.swift; path = "New Group/FriendsView.swift"; sourceTree = "<group>"; };
 		9B4BA0732B529861005747BF /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GroupsView.swift; path = ../GroupsView.swift; sourceTree = "<group>"; };
 		9B4BA0752B52988B005747BF /* FriendsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendsTableCell.swift; path = ../FriendsTableCell.swift; sourceTree = "<group>"; };
 		9B4BA0772B5298BE005747BF /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotosView.swift; path = ../PhotosView.swift; sourceTree = "<group>"; };
@@ -80,18 +80,26 @@
 				9B2E20822B434864005AD0E5 /* Assets.xcassets */,
 				9B2E20842B434864005AD0E5 /* LaunchScreen.storyboard */,
 				9B2E20872B434864005AD0E5 /* Info.plist */,
+				9B7F0D692B5D3EEE00FA1B09 /* New Group */,
 				9B4BA0712B529842005747BF /* FriendsView.swift */,
 				9B4BA0732B529861005747BF /* GroupsView.swift */,
 				9B4BA0772B5298BE005747BF /* PhotosView.swift */,
 				9B4BA0752B52988B005747BF /* FriendsTableCell.swift */,
 				9B4BA07B2B52B83B005747BF /* CustomCellForGroups.swift */,
 				9B72E8842B52E400002976F5 /* CustomCellPhotos.swift */,
-				9B9F3E8F2B598310004907C2 /* NetworkServiceClass.swift */,
-				9B9F3E912B5998D2004907C2 /* FriendsStructure.swift */,
-				9B788AB72B5BDB6A00BDFACF /* GroupsStructure.swift */,
-				9B788AB92B5BE8F200BDFACF /* PhotoStructure.swift */,
 			);
 			path = project1;
+			sourceTree = "<group>";
+		};
+		9B7F0D692B5D3EEE00FA1B09 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				9B9F3E8F2B598310004907C2 /* NetworkServiceClass.swift */,
+				9B788AB92B5BE8F200BDFACF /* PhotoStructure.swift */,
+				9B788AB72B5BDB6A00BDFACF /* GroupsStructure.swift */,
+				9B9F3E912B5998D2004907C2 /* FriendsStructure.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
