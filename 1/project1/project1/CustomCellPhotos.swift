@@ -15,9 +15,9 @@ final class CustomCellPhotos: UICollectionViewCell{
         contentView.addSubview(cell)
     }
     
-    func updateValues(photosModel: Jpg) {//JPG ----------------------------
+    func updateValues(photosModel: Photo) {//JPG ----------------------------
         DispatchQueue.global().async{
-            if let photoUrl = URL(string: photosModel.url ?? "error"), let data = try? Data(contentsOf: photoUrl) {
+            if let photoUrl = URL(string: photosModel.sizes.first?.url ?? "error"), let data = try? Data(contentsOf: photoUrl) {
                 DispatchQueue.main.async {
                     self.cell.image = UIImage(data: data)
                 }

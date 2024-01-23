@@ -55,7 +55,7 @@ final class NetworkServiceClass {
         }.resume()
     }
     
-    func showPhotos(handler: @escaping ([Jpg]) -> Void){ //ТУТ НАДО jpg -----------------
+    func showPhotos(handler: @escaping ([Photo]) -> Void){ //ТУТ НАДО jpg -----------------
         guard let url = URL(string: "https://api.vk.com/method/photos.get?count=3&album_id=profile&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             return	
@@ -68,7 +68,7 @@ final class NetworkServiceClass {
             }
             do {
                 let photosData = try JSONDecoder().decode(PhotoStructure.self, from: data)
-                handler(photosData.response.items.sizes)
+                handler(photosData.response.items)
                 print(photosData)
             } catch {
                 print(error)

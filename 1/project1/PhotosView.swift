@@ -9,7 +9,7 @@ import UIKit
 
 class PhotosView: UICollectionViewController{
     
-    private var model: [Jpg] = []
+    private var model: [Photo] = []
     
     let photosNet = NetworkServiceClass()
     
