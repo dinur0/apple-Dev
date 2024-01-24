@@ -4,7 +4,7 @@ class GroupsView: UITableViewController{
     
     private var model: [Group] = []
     
-    let groupsNet = NetworkServiceClass()
+    private let groupsNet = NetworkServiceClass()
     
     override func viewDidLoad() {
         super.viewDidLoad()

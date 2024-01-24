@@ -11,7 +11,7 @@ class PhotosView: UICollectionViewController{
     
     private var model: [Photo] = []
     
-    let photosNet = NetworkServiceClass()
+    private let photosNet = NetworkServiceClass()
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         model.count

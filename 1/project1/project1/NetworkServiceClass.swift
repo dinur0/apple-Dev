@@ -13,12 +13,12 @@ final class NetworkServiceClass {
     
     static var networkToken = ""
     
-    func showFriends(){
-        guard let url = URL(string: "https://api.vk.com/method/friends.get?fields=photo_100&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
+    func showFriends(handler: @escaping ([Friend]) -> Void){
+        guard let url = URL(string: "https://api.vk.com/method/friends.get?fields=photo_100,online&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             return
         }
-        print(url)
+//        print(url)
         
         thisSession.dataTask(with: url) { (data, _, error) in
             guard let data else{
@@ -26,15 +26,58 @@ final class NetworkServiceClass {
             }
             do {
                 let friendsData = try JSONDecoder().decode(FriendsStructure.self, from: data)
-                print(friendsData)
+                handler(friendsData.response.items)
+//                print(friendsData)
             } catch {
                 print(error)
             }
         }.resume()
     }
     
-    func showGroups(){
-        guard let url = URL(string: "https://api.vk.com/method/groups.get?extended=1&count=3&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
+    func showGroups(handler: @escaping ([Group]) -> Void){
+        guard let url = URL(string: "https://api.vk.com/method/groups.get?extended=1&count=3&fields=photo_50,description&access_token=\(NetworkServiceClass.networkToken)&v=5.131") // выводит 3 группы
+        else {
+            return
+        }
+//        print(url)
+        
+        thisSession.dataTask(with: url) { (data, _, error) in
+            guard let data else{
+                return
+            }
+            do {
+                let groupsData = try JSONDecoder().decode(GroupsStructure.self, from: data)
+                handler(groupsData.response.items)
+//                print(groupsData)
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    func showPhotos(handler: @escaping ([Photo]) -> Void){ //ТУТ НАДО jpg -----------------
+        guard let url = URL(string: "https://api.vk.com/method/photos.get?count=3&album_id=profile&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
+        else {
+            return	
+        }
+//        print(url)
+        
+        thisSession.dataTask(with: url) { (data, _, error) in
+            guard let data else{
+                return
+            }
+            do {
+                let photosData = try JSONDecoder().decode(PhotoStructure.self, from: data)
+                handler(photosData.response.items)
+//                print(photosData)
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    func showProfile(handler: @escaping (Profile) -> Void){
+        guard let url=URL(string: "https://api.vk.com/method/users.get?fields=photo_400_orig&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             return
         }
@@ -45,30 +88,9 @@ final class NetworkServiceClass {
                 return
             }
             do {
-                let groupsData = try JSONDecoder().decode(GroupsStructure.self, from: data)
-                print()
-                print(groupsData)
-            } catch {
-                print(error)
-            }
-        }.resume()
-    }
-    
-    func showPhotos(){
-        guard let url = URL(string: "https://api.vk.com/method/photos.get?count=3&album_id=profile&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
-        else {
-            return	
-        }
-        print(url)
-        
-        thisSession.dataTask(with: url) { (data, _, error) in
-            guard let data else{
-                return
-            }
-            do {
-                let photosData = try JSONDecoder().decode(PhotoStructure.self, from: data)
-                print()
-                print(photosData)
+                let userData = try JSONDecoder().decode(ProfileStructure.self, from: data)
+                handler(userData.response)
+                print(userData)
             } catch {
                 print(error)
             }

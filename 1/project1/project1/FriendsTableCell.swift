@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomCellForGroups: UITableViewCell{
+class FriendsTableCell: UITableViewCell{
     
     private var label: UILabel = {
         let label = UILabel()
@@ -16,38 +16,39 @@ class CustomCellForGroups: UITableViewCell{
         return label
     }()
     
-    private var label2: UILabel = {
-        let label2 = UILabel()
-        label2.text = "Description"
-        label2.textAlignment = .center
-        label2.backgroundColor = .white
-        return label2
-    }()
 
     private var pictureInCell: UIImageView = {
         let pictureInCell = UIImageView()
-        pictureInCell.backgroundColor = .red
+        pictureInCell.backgroundColor = .orange
         pictureInCell.layer.cornerRadius = 25
         return pictureInCell
     }()
     
-    func updateValues(groupsModel: Group) {
-        label.text = groupsModel.name ?? "без названия"
-        label2.text = groupsModel.description ?? "без описания"
+    func updateValues(friendsModel: Friend) {
+        
+        label.text = (friendsModel.firstName ?? "nil")+" "+(friendsModel.lastName ?? "nil")
+        if let online = friendsModel.booleanOnline {
+            let isOn = online == 1
+                if isOn {
+                    label.textColor = #colorLiteral(red: 0, green: 1, blue: 0.1462361823, alpha: 1)
+                } else {
+                    label.textColor = #colorLiteral(red: 1, green: 0, blue: 0.09760022642, alpha: 1)
+                }
+            }
         DispatchQueue.global().async{
-            if let photoUrl = URL(string: groupsModel.photo50 ?? "error"), let data = try? Data(contentsOf: photoUrl) {
+            if let photoUrl = URL(string: friendsModel.photo ?? "error"), let data = try? Data(contentsOf: photoUrl) {
                 DispatchQueue.main.async {
                     self.pictureInCell.image = UIImage(data: data)
-                    self.pictureInCell.layer.cornerRadius = 50
+                    self.pictureInCell.layer.cornerRadius = 25
                 }
             }
         }
         
     }
     
+    
     func setup(){
         contentView.addSubview(label)
-        contentView.addSubview(label2)
         contentView.addSubview(pictureInCell)
     }
     
@@ -64,29 +65,23 @@ class CustomCellForGroups: UITableViewCell{
     
     private func addConstraints() {
         label.translatesAutoresizingMaskIntoConstraints = false
-        label2.translatesAutoresizingMaskIntoConstraints = false
         pictureInCell.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
             pictureInCell.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             pictureInCell.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
-            pictureInCell.heightAnchor.constraint(equalToConstant: 40),
-            pictureInCell.widthAnchor.constraint(equalTo: pictureInCell.heightAnchor, constant: 20),
+            pictureInCell.heightAnchor.constraint(equalToConstant: 50),
+            pictureInCell.widthAnchor.constraint(equalTo: pictureInCell.heightAnchor, constant: 0),
             
-            label.topAnchor.constraint(equalTo: pictureInCell.topAnchor),
+            label.topAnchor.constraint(equalTo: pictureInCell.topAnchor, constant: 0),
             label.leftAnchor.constraint(equalTo: pictureInCell.rightAnchor, constant: 0),
-            label.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
-            
-            label2.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
-            label2.leftAnchor.constraint(equalTo: label.leftAnchor),
-            label2.rightAnchor.constraint(equalTo: label.rightAnchor),
-            label2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
-            
-            
+            label.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -30),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
+
         ])
     }
 }
 //#Preview{
-//    GroupsView()
+//    FriendsView()
 //}
