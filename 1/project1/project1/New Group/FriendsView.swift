@@ -40,8 +40,8 @@ class FriendsView: UITableViewController{
 
 extension UITableViewController {
     @objc func tapToProfile(){
-        let view = ProfileView()
-        navigationController?.pushViewController(view, animated: false)
+//        let view = ProfileView()
+//        navigationController?.pushViewController(view, animated: false)
     }
 }
 //#Preview{
