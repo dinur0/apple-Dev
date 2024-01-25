@@ -1,10 +1,3 @@
-//
-//  ProfileView.swift
-//  project1
-//
-//  Created by хех on 24.01.2024.
-//
-
 import UIKit
 
 class ProfileView: UIViewController{
@@ -33,12 +26,15 @@ class ProfileView: UIViewController{
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         profileNet.showProfile{ [weak self] arrayOfProfile in
             self?.model = arrayOfProfile
+            updateValues(profileModel: arrayOfProfile)
+            
 //                DispatchQueue.main.async {
 //                    self?.view.reloadData()
 //                }
             //        }
             setup()
             addConstraints()
+            
         }
         
         func setup(){
