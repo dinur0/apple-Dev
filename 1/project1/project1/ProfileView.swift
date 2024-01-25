@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileView: UIViewController{
     
-    private var model: Profile
+    private var model: Profile?
     
     private let profileNet = NetworkServiceClass()
     
