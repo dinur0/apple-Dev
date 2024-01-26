@@ -76,7 +76,7 @@ final class NetworkServiceClass {
         }.resume()
     }
     
-    func showProfile(handler: @escaping (Profile) -> Void){
+    func showProfile(handler: @escaping ([Profile]) -> Void){
         guard let url=URL(string: "https://api.vk.com/method/users.get?fields=photo_400_orig&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             return

@@ -6,7 +6,7 @@
 //
 
 struct ProfileStructure: Decodable{
-    var response: Profile
+    var response: [Profile]
 }
 
 struct Profile: Decodable{

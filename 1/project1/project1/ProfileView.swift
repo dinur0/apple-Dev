@@ -1,3 +1,10 @@
+//
+//  ProfileView.swift
+//  project1
+//
+//  Created by хех on 24.01.2024.
+//
+
 import UIKit
 
 class ProfileView: UIViewController{
@@ -9,7 +16,7 @@ class ProfileView: UIViewController{
     private var label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "FFFFFFFF"
+        label.text = ""
         return label
     }()
     
@@ -24,16 +31,17 @@ class ProfileView: UIViewController{
         super.viewDidLoad()
         title = "PROFILE!!!!!!!!"
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        setup()
+        addConstraints()
         profileNet.showProfile{ [weak self] arrayOfProfile in
-            self?.model = arrayOfProfile
-            updateValues(profileModel: arrayOfProfile)
+            self?.model = arrayOfProfile.first
+            updateValues(profileModel: arrayOfProfile.first!)
             
 //                DispatchQueue.main.async {
 //                    self?.view.reloadData()
 //                }
             //        }
-            setup()
-            addConstraints()
+
             
         }
         

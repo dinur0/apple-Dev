@@ -40,8 +40,14 @@ class FriendsView: UITableViewController{
 
 extension UITableViewController {
     @objc func tapToProfile(){
-        let view = ProfileView()
-        navigationController?.pushViewController(view, animated: false)
+//        let view = ProfileView()
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        animation.type = .fade
+        animation.duration = 1
+        navigationController?.view.layer.add(animation, forKey: nil)
+        navigationController?.pushViewController(ProfileView(), animated: false)
+//        navigationController?.pushViewController(ProfileView, animated: false)
     }
 }
 //#Preview{
