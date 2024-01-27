@@ -20,7 +20,8 @@ class PhotosView: UICollectionViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Photos"
-        collectionView.backgroundColor = .blue
+        view.backgroundColor = Themes.currentTheme.backgroundColor
+        collectionView.backgroundColor = Themes.currentTheme.backgroundColor
         collectionView.register(CustomCellPhotos.self, forCellWithReuseIdentifier: "thisCell")
 //        photosNet.showPhotos()
         photosNet.showPhotos{ [weak self] arrayOfPhotos in

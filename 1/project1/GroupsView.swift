@@ -9,7 +9,8 @@ class GroupsView: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Groups"
-        view.backgroundColor = #colorLiteral(red: 0.4338220026, green: 0.4338220026, blue: 0.4338220026, alpha: 1)
+        view.backgroundColor = Themes.currentTheme.backgroundColor
+        tableView.backgroundColor = Themes.currentTheme.backgroundColor
 //        groupsNet.showGroups()
         tableView.register(CustomCellForGroups.self, forCellReuseIdentifier: "GRCell")
         groupsNet.showGroups{ [weak self] arrayOfGroups in

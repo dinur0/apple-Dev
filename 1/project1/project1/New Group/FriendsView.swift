@@ -9,7 +9,8 @@ class FriendsView: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Friends"
-        view.backgroundColor = #colorLiteral(red: 0.4338220026, green: 0.4338220026, blue: 0.4338220026, alpha: 1)
+        view.backgroundColor = Themes.currentTheme.backgroundColor
+        tableView.backgroundColor = Themes.currentTheme.backgroundColor
         tableView.register(FriendsTableCell.self, forCellReuseIdentifier: "FRCell")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: self, action: #selector(tapToProfile) )
         netFriends.showFriends{ [weak self] arrayOfFriends in

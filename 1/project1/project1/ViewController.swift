@@ -12,7 +12,7 @@ import WebKit
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            view.backgroundColor = .white
+            view.backgroundColor = Themes.currentTheme.backgroundColor
             guard let url = URL(string: "https://oauth.vk.com/authorize?client_id=51835022&redirect_uri=https://oauth.vk.com/blank.html&scope=262150&display=mobile&response_type=token") else { return }
             myWeb.load(URLRequest(url: url))
             setupUI()

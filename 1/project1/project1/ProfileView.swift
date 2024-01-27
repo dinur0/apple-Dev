@@ -7,11 +7,17 @@
 
 import UIKit
 
-class ProfileView: UIViewController{
+class ProfileView: UIViewController, ThemeDelegateProtocol{
+    func updateColor() {
+        view.backgroundColor = Themes.currentTheme.backgroundColor
+    }
+    
     
     private var model: Profile?
     
     private let profileNet = NetworkServiceClass()
+    
+    private var themeColor = ChangeThemeSubview() //HERE
     
     private var label: UILabel = {
         let label = UILabel()
@@ -30,7 +36,7 @@ class ProfileView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "PROFILE!!!!!!!!"
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = Themes.currentTheme.backgroundColor
         setup()
         addConstraints()
         profileNet.showProfile{ [weak self] arrayOfProfile in
@@ -46,11 +52,13 @@ class ProfileView: UIViewController{
         }
         
         func setup(){
+            themeColor.delegate = self //HERE
             view.addSubview(label)
             view.addSubview(image)
         }
         
         func updateValues(profileModel: Profile){
+//            label.text = (profileModel.firstName ?? "nil")+" "+(profileModel.lastName ?? "nil")
             DispatchQueue.global().async{
                 DispatchQueue.main.async {
                     self.label.text = (profileModel.firstName ?? "nil")+" "+(profileModel.lastName ?? "nil")
@@ -88,6 +96,7 @@ class ProfileView: UIViewController{
         
     }
 }
+
 
 //#Preview{
 //    ViewController()
