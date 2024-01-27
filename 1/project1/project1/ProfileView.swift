@@ -51,12 +51,15 @@ class ProfileView: UIViewController{
         }
         
         func updateValues(profileModel: Profile){
-            label.text = (profileModel.firstName ?? "nil")+" "+(profileModel.lastName ?? "nil")
             DispatchQueue.global().async{
+                DispatchQueue.main.async {
+                    self.label.text = (profileModel.firstName ?? "nil")+" "+(profileModel.lastName ?? "nil")
+                }
                 if let profileUrl = URL(string: profileModel.photo ?? "error"), let data = try? Data(contentsOf: profileUrl) {
                     DispatchQueue.main.async {
                         self.image.image = UIImage(data: data)
                         self.image.layer.cornerRadius = 105
+                        
                     }
                 }
             }
