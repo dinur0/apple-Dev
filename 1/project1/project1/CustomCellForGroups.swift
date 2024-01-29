@@ -33,7 +33,7 @@ class CustomCellForGroups: UITableViewCell{
     
     func updateValues(groupsModel: Group) {
         label.text = groupsModel.name ?? "без названия"
-        label2.text = groupsModel.description ?? "без описания"
+        label2.text = groupsModel.descr ?? "без описания"
         DispatchQueue.global().async{
             if let photoUrl = URL(string: groupsModel.photo50 ?? "error"), let data = try? Data(contentsOf: photoUrl) {
                 DispatchQueue.main.async {

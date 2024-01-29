@@ -9,6 +9,8 @@ import UIKit
 
 class FriendsTableCell: UITableViewCell{
     
+    var tap: ((String?, UIImage?)->Void)?
+    
     private var label: UILabel = {
         let label = UILabel()
         label.text = "Name"
@@ -55,6 +57,8 @@ class FriendsTableCell: UITableViewCell{
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector())
+        addGestureRecognizer(recognizer)
         setup()
         addConstraints()
     }
@@ -80,6 +84,10 @@ class FriendsTableCell: UITableViewCell{
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
 
         ])
+    }
+    
+    @objc func click(){
+        tap?(label.text, pictureInCell.image)
     }
 }
 //#Preview{

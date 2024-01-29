@@ -8,16 +8,16 @@
 import UIKit
 
 class ProfileView: UIViewController, ThemeDelegateProtocol{
+    
     func updateColor() {
         view.backgroundColor = Themes.currentTheme.backgroundColor
     }
     
     
     private var model: Profile?
-    
     private let profileNet = NetworkServiceClass()
-    
-    private var themeColor = ChangeThemeSubview() //HERE
+    private let isUser: Bool
+    private var themeColorView = ChangeThemeSubview() //HERE
     
     private var label: UILabel = {
         let label = UILabel()
@@ -33,16 +33,34 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
         return image
     }()
     
+    init(name: String? = nil, photo: UIImage? = nil, isUser: Bool) {
+        super.init(nibName: nil, bundle: nil)
+        self.isUser = isUser
+        label.text = name
+        image.image = photo
+        themeColorView.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         title = "PROFILE!!!!!!!!"
         view.backgroundColor = Themes.currentTheme.backgroundColor
         setup()
         addConstraints()
-        profileNet.showProfile{ [weak self] arrayOfProfile in
-            self?.model = arrayOfProfile.first
-            updateValues(profileModel: arrayOfProfile.first!)
-            
+        if isUser{
+            profileNet.showProfile{ [weak self] arrayOfProfile in
+                self?.model = arrayOfProfile.first
+                self.updateValues(profileModel: arrayOfProfile.first)
+            }
+        } else {
+                themeColorView.isHidden = true
+            }
+
 //                DispatchQueue.main.async {
 //                    self?.view.reloadData()
 //                }
@@ -52,7 +70,7 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
         }
         
         func setup(){
-            themeColor.delegate = self //HERE
+            themeColorView.delegate = self //HERE
             view.addSubview(label)
             view.addSubview(image)
         }
@@ -95,7 +113,7 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
         
         
     }
-}
+
 
 
 //#Preview{

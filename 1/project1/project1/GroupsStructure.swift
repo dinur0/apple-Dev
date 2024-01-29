@@ -14,13 +14,13 @@ struct Groups: Decodable {
 struct Group: Decodable {
     var id: Int
     var name: String?
-    var description: String?
+    var descr: String?
     var photo50: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case name
-        case description
+        case descr = "description"
         case photo50 = "photo_50"
     }
 }

@@ -1,25 +1,47 @@
 import UIKit
 
-class FriendsView: UITableViewController{
+final class FriendsView: UITableViewController{
     
     private let netFriends = NetworkServiceClass()
-    
+    private var cache = CoreData()
     private var model: [Friend] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        model = cache.getFriends()
+        tableView.reloadData()
         title = "Friends"
         view.backgroundColor = Themes.currentTheme.backgroundColor
         tableView.backgroundColor = Themes.currentTheme.backgroundColor
         tableView.register(FriendsTableCell.self, forCellReuseIdentifier: "FRCell")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: self, action: #selector(tapToProfile) )
-        netFriends.showFriends{ [weak self] arrayOfFriends in
-            self?.model = arrayOfFriends
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "pencil"), style: .plain, target: self, action: #selector(tapToProfile))
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(downloadFriends), for: .valueChanged)
+        downloadFriends()
+
+    }
+    
+    @objc func downloadFriends(){
+        netFriends.showFriends{ [weak self] res in
+            switch res {
+            case .success(let friends):
+                self?.model = friends
+                self?.cache.saveFriends(friends: friends)
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(_):
+                self?.model = self?.cache.getFriends() ?? []
+                DispatchQueue.main.async {
+                    self?.getAlert()
+                }
             }
+            DispatchQueue.main.async {
+                self?.refreshControl?.attributedTitle = NSAttributedString(string: "Обновление списка...")//Задание 4
+                self?.refreshControl?.endRefreshing()
+            }
+            
         }
-        
     }
     
 //    override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,7 +61,14 @@ class FriendsView: UITableViewController{
     }
 }
 
-extension UITableViewController {
+private extension FriendsView {
+    func getAlert(){
+        let errorData = DateConverter.convertData(data: cache.fetchFriendsDate())
+        let alert = UIAlertController(title: "Ошибка получеия данных", message: "Ошибка произошла \(errorData)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Закрыть окно", style: .default, handler: nil))
+        present(alert, animated: false, completion: nil)
+    }
+    
     @objc func tapToProfile(){
 //        let view = ProfileView()
         let animation = CATransition()
@@ -47,7 +76,7 @@ extension UITableViewController {
         animation.type = .fade
         animation.duration = 1
         navigationController?.view.layer.add(animation, forKey: nil)
-        navigationController?.pushViewController(ProfileView(), animated: false)
+        navigationController?.pushViewController(ProfileView(isUser: false), animated: false)
 //        navigationController?.pushViewController(ProfileView, animated: false)
     }
 }
