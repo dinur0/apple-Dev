@@ -93,28 +93,28 @@ final class CoreData{
     }
     
     func addFriendsDate(){
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FriendsData")
-        let friendsDate = FriendsData(context: persistentContainer.viewContext)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FriendsDataTime")
+        let friendsDate = FriendsDataTime(context: persistentContainer.viewContext)
         friendsDate.date = Date()
         save()
     }
     
     func fetchFriendsDate()->Date?{
-        let fetchRequest: NSFetchRequest<FriendsData> = FriendsData.fetchRequest()
+        let fetchRequest: NSFetchRequest<FriendsDataTime> = FriendsDataTime.fetchRequest()
         guard let date = try? persistentContainer.viewContext.fetch(fetchRequest) else {
             return nil }
         return date.first?.date
     }
     
     func addFGroupsDate(){
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GroupsData")
-        let groupsDate = GroupsData(context: persistentContainer.viewContext)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "GroupsDataTime")
+        let groupsDate = GroupsDataTime(context: persistentContainer.viewContext)
         groupsDate.date = Date()
         save()
     }
     
     func fetchGroups()->Date?{
-        let fetchRequest: NSFetchRequest<GroupsData> = GroupsData.fetchRequest()
+        let fetchRequest: NSFetchRequest<GroupsDataTime> = GroupsDataTime.fetchRequest()
         guard let date = try? persistentContainer.viewContext.fetch(fetchRequest) else {
             return nil }
         return date.first?.date
