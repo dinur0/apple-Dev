@@ -16,7 +16,7 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
     
     private var model: Profile?
     private let profileNet = NetworkServiceClass()
-    private let isUser: Bool
+    private var isUser: Bool
     private var themeColorView = ChangeThemeSubview() //HERE
     
     private var label: UILabel = {
@@ -55,7 +55,7 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
         if isUser{
             profileNet.showProfile{ [weak self] arrayOfProfile in
                 self?.model = arrayOfProfile.first
-                self.updateValues(profileModel: arrayOfProfile.first)
+                self?.updateValues(profileModel: arrayOfProfile.first!)
             }
         } else {
                 themeColorView.isHidden = true
