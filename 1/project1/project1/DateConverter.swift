@@ -1,7 +1,7 @@
 import Foundation
 
 final class DateConverter{
-    func convertData(data: Date?) -> String{
+    static func convertData(data: Date?) -> String{
         guard let thisDate = data else{
             return "DateConverterError"
         }

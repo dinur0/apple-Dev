@@ -34,8 +34,8 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
     }()
     
     init(name: String? = nil, photo: UIImage? = nil, isUser: Bool) {
-        super.init(nibName: nil, bundle: nil)
         self.isUser = isUser
+        super.init(nibName: nil, bundle: nil)
         label.text = name
         image.image = photo
         themeColorView.delegate = self
