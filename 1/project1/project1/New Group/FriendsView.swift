@@ -18,7 +18,7 @@ final class FriendsView: UITableViewController{
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(downloadFriends), for: .valueChanged)
         downloadFriends()
-
+        
     }
     
     @objc func downloadFriends(){
@@ -44,19 +44,23 @@ final class FriendsView: UITableViewController{
         }
     }
     
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        5
-//    }
+    //    override func numberOfSections(in tableView: UITableView) -> Int {
+    //        5
+    //    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         model.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        FriendsTableCell()
+        //        FriendsTableCell()
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FRCell", for: indexPath) as? FriendsTableCell else {
             return FriendsTableCell()
         }
         let downloadedFriends = model[indexPath.row]
         cell.updateValues(friendsModel: downloadedFriends)
+        cell.tap = { [weak self] text, photo in
+            self?.navigationController?.pushViewController(ProfileView(name: text, photo: photo, isUser: false), animated: true)
+            
+        }
         return cell
     }
 }
@@ -70,14 +74,14 @@ private extension FriendsView {
     }
     
     @objc func tapToProfile(){
-//        let view = ProfileView()
+        //        let view = ProfileView()
         let animation = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         animation.type = .fade
         animation.duration = 1
         navigationController?.view.layer.add(animation, forKey: nil)
-        navigationController?.pushViewController(ProfileView(isUser: false), animated: false)
-//        navigationController?.pushViewController(ProfileView, animated: false)
+        navigationController?.pushViewController(ProfileView(isUser: true), animated: false)
+        //        navigationController?.pushViewController(ProfileView, animated: false)
     }
 }
 //#Preview{

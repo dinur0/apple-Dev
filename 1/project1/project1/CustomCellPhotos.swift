@@ -39,7 +39,7 @@ final class CustomCellPhotos: UICollectionViewCell{
         cell.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-        
+            
             cell.topAnchor.constraint(equalTo: contentView.topAnchor),
             cell.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             cell.leftAnchor.constraint(equalTo: contentView.leftAnchor),

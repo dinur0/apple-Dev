@@ -9,9 +9,7 @@ import UIKit
 
 class ProfileView: UIViewController, ThemeDelegateProtocol{
     
-    func updateColor() {
-        view.backgroundColor = Themes.currentTheme.backgroundColor
-    }
+    
     
     
     private var model: Profile?
@@ -47,7 +45,7 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = "PROFILE!!!!!!!!"
         view.backgroundColor = Themes.currentTheme.backgroundColor
         setup()
@@ -58,64 +56,58 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
                 self?.updateValues(profileModel: arrayOfProfile.first!)
             }
         } else {
-                themeColorView.isHidden = true
-            }
-
-//                DispatchQueue.main.async {
-//                    self?.view.reloadData()
-//                }
-            //        }
-
-            
+            themeColorView.isHidden = true
         }
-        
-        func setup(){
-            themeColorView.delegate = self //HERE
-            view.addSubview(label)
-            view.addSubview(image)
-        }
-        
-        func updateValues(profileModel: Profile){
-//            label.text = (profileModel.firstName ?? "nil")+" "+(profileModel.lastName ?? "nil")
-            DispatchQueue.global().async{
-                DispatchQueue.main.async {
-                    self.label.text = (profileModel.firstName ?? "nil")+" "+(profileModel.lastName ?? "nil")
-                }
-                if let profileUrl = URL(string: profileModel.photo ?? "error"), let data = try? Data(contentsOf: profileUrl) {
-                    DispatchQueue.main.async {
-                        self.image.image = UIImage(data: data)
-                        self.image.layer.cornerRadius = 105
-                        
-                    }
-                }
-            }
-        }
-        
-        func addConstraints() {
-            label.translatesAutoresizingMaskIntoConstraints=false
-            image.translatesAutoresizingMaskIntoConstraints=false
-            
-            NSLayoutConstraint.activate([
-                
-                image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:20),
-                image.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                image.heightAnchor.constraint(equalToConstant: view.frame.size.height / 4),
-                image.widthAnchor.constraint(equalTo: image.heightAnchor),
-                
-                label.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20),
-                label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                label.widthAnchor.constraint(equalTo: image.widthAnchor),
-                label.heightAnchor.constraint(equalToConstant: view.frame.size.height / 10)
-                
-            ])
-        }
-        
-        
-        
     }
-
-
-
+    
+    func setup(){
+        view.addSubview(label)
+        view.addSubview(image)
+        view.addSubview(themeColorView)
+    }
+    
+    func updateValues(profileModel: Profile){
+        //            label.text = (profileModel.firstName ?? "nil")+" "+(profileModel.lastName ?? "nil")
+        DispatchQueue.global().async{
+            DispatchQueue.main.async {
+                self.label.text = (profileModel.firstName ?? "nil")+" "+(profileModel.lastName ?? "nil")
+            }
+            if let profileUrl = URL(string: profileModel.photo ?? "error"), let data = try? Data(contentsOf: profileUrl) {
+                DispatchQueue.main.async {
+                    self.image.image = UIImage(data: data)
+                    self.image.layer.cornerRadius = 105
+                    
+                }
+            }
+        }
+    }
+    
+    func updateColor() {
+        view.backgroundColor = Themes.currentTheme.backgroundColor
+    }
+    
+    func addConstraints() {
+        label.translatesAutoresizingMaskIntoConstraints=false
+        image.translatesAutoresizingMaskIntoConstraints=false
+        themeColorView.translatesAutoresizingMaskIntoConstraints=false
+        
+        NSLayoutConstraint.activate([
+            
+            image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:20),
+            image.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            image.heightAnchor.constraint(equalToConstant: view.frame.size.height / 4),
+            image.widthAnchor.constraint(equalTo: image.heightAnchor),
+            
+            label.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 20),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.widthAnchor.constraint(equalTo: image.widthAnchor),
+            label.heightAnchor.constraint(equalToConstant: view.frame.size.height / 10),
+            
+            themeColorView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
+            themeColorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+    }
+}
 //#Preview{
-//    ViewController()
+//    ProfileView(isUser: true)
 //}

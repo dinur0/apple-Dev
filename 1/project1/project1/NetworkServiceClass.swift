@@ -19,7 +19,7 @@ final class NetworkServiceClass {
             handler(.failure(MyNetworkErrors.dataError))
             return
         }
-//        print(url)
+        //print(url)
         
         thisSession.dataTask(with: url) { (data, _, error) in
             guard let data else{
@@ -28,11 +28,12 @@ final class NetworkServiceClass {
             }
             if let error{
                 handler(.failure(MyNetworkErrors.dataError))
+                print(error)
             }
             do {
                 let friendsData = try JSONDecoder().decode(FriendsStructure.self, from: data)
                 handler(.success(friendsData.response.items))
-//                print(friendsData)
+                //print(friendsData)
             } catch {
                 handler(.failure(error))
             }
@@ -45,7 +46,7 @@ final class NetworkServiceClass {
             handler(.failure(MyNetworkErrors.dataError))
             return
         }
-//        print(url)
+        //        print(url)
         
         thisSession.dataTask(with: url) { (data, _, error) in
             guard let data else{
@@ -54,23 +55,24 @@ final class NetworkServiceClass {
             }
             if let error{
                 handler(.failure(MyNetworkErrors.dataError))
+                print(error)
             }
             do {
                 let groupsData = try JSONDecoder().decode(GroupsStructure.self, from: data)
                 handler(.success(groupsData.response.items))
-//                print(groupsData)
+                //                print(groupsData)
             } catch {
                 handler(.failure(error))
             }
         }.resume()
     }
     
-    func showPhotos(handler: @escaping ([Photo]) -> Void){ //ТУТ НАДО jpg -----------------
+    func showPhotos(handler: @escaping ([Photo]) -> Void){
         guard let url = URL(string: "https://api.vk.com/method/photos.get?count=3&album_id=profile&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
-            return	
+            return
         }
-//        print(url)
+        //        print(url)
         
         thisSession.dataTask(with: url) { (data, _, error) in
             guard let data else{
@@ -79,7 +81,7 @@ final class NetworkServiceClass {
             do {
                 let photosData = try JSONDecoder().decode(PhotoStructure.self, from: data)
                 handler(photosData.response.items)
-//                print(photosData)
+                //                print(photosData)
             } catch {
                 print(error)
             }

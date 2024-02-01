@@ -18,7 +18,7 @@ class FriendsTableCell: UITableViewCell{
         return label
     }()
     
-
+    
     private var pictureInCell: UIImageView = {
         let pictureInCell = UIImageView()
         pictureInCell.backgroundColor = .orange
@@ -31,12 +31,12 @@ class FriendsTableCell: UITableViewCell{
         label.text = (friendsModel.firstName ?? "nil")+" "+(friendsModel.lastName ?? "nil")
         if let online = friendsModel.booleanOnline {
             let isOn = online == 1
-                if isOn {
-                    label.textColor = #colorLiteral(red: 0, green: 1, blue: 0.1462361823, alpha: 1)
-                } else {
-                    label.textColor = #colorLiteral(red: 1, green: 0, blue: 0.09760022642, alpha: 1)
-                }
+            if isOn {
+                label.textColor = #colorLiteral(red: 0, green: 1, blue: 0.1462361823, alpha: 1)
+            } else {
+                label.textColor = #colorLiteral(red: 1, green: 0, blue: 0.09760022642, alpha: 1)
             }
+        }
         DispatchQueue.global().async{
             if let photoUrl = URL(string: friendsModel.photo ?? "error"), let data = try? Data(contentsOf: photoUrl) {
                 DispatchQueue.main.async {
@@ -82,7 +82,7 @@ class FriendsTableCell: UITableViewCell{
             label.leftAnchor.constraint(equalTo: pictureInCell.rightAnchor, constant: 0),
             label.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -30),
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
-
+            
         ])
     }
     

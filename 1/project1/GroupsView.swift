@@ -13,7 +13,7 @@ class GroupsView: UITableViewController{
         title = "Groups"
         view.backgroundColor = Themes.currentTheme.backgroundColor
         tableView.backgroundColor = Themes.currentTheme.backgroundColor
-//        groupsNet.showGroups()
+        //        groupsNet.showGroups()
         tableView.register(CustomCellForGroups.self, forCellReuseIdentifier: "GRCell")
         
         downloadGroups()
@@ -41,9 +41,9 @@ class GroupsView: UITableViewController{
         }
     }
     
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        5
-//    }
+    //    override func numberOfSections(in tableView: UITableView) -> Int {
+    //        5
+    //    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         model.count
     }

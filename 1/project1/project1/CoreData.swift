@@ -45,7 +45,7 @@ final class CoreData{
             friendsModel.photo = friend.photo
         }
         save()
-//        add0
+        //        add0
     }
     
     func getFriends() -> [Friend] {
@@ -54,9 +54,9 @@ final class CoreData{
             return []
         }
         var downloadedFriends: [Friend] = []
-        for friend in downloadedFriends {
+        for friend in friends {
             downloadedFriends.append(Friend(id: Int(friend.id), firstName: friend.firstName,
-                                            lastName: friend.lastName, photo: friend.photo, booleanOnline: Int(friend.booleanOnline ?? 0)))//почему требует распаковку?
+                                            lastName: friend.lastName, photo: friend.photo, booleanOnline: Int(friend.booleanOnline)))//почему требует распаковку?
         }
         return downloadedFriends
     }
@@ -76,7 +76,7 @@ final class CoreData{
             groupsModel.photo50 = group.photo50
         }
         save()
-//        add0
+        //        add0
     }
     
     func getGroups()->[Group]{
@@ -85,8 +85,8 @@ final class CoreData{
             return []
         }
         var downloadedGroups: [Group] = []
-        for group in downloadedGroups {
-            downloadedGroups.append(Group(id: Int(group.id), name: group.name, photo50: group.photo50))//почему требует распаковку?
+        for group in groups {
+            downloadedGroups.append(Group(id: Int(group.id), name: group.name, photo50: group.photo50))
             
         }
         return downloadedGroups

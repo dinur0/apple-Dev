@@ -15,27 +15,27 @@ final class ChangeThemeSubview: UIView{
     weak var delegate: ThemeDelegateProtocol?
     
     private lazy var button1: UIButton = {
-        let button1 = UIButton()
-        button1.setTitle("Сменить на синюю тему", for: .normal)
-        button1.backgroundColor = BlueTheme().backgroundColor
-        button1.addTarget(self, action: #selector(tap1), for: .touchUpInside)
-        return button1
+        let button = UIButton()
+        button.setTitle("Сменить на синюю тему", for: .normal)
+        button.backgroundColor = BlueTheme().backgroundColor
+        button.addTarget(self, action: #selector(tap1), for: .touchUpInside)
+        return button
     }()
     
     private lazy var button2: UIButton = {
-        let button1 = UIButton()
-        button1.setTitle("Сменить на красную тему", for: .normal)
-        button1.backgroundColor = RedTheme().backgroundColor
-        button1.addTarget(self, action: #selector(tap2), for: .touchUpInside)
-        return button2
+        let button = UIButton()
+        button.setTitle("Сменить на красную тему", for: .normal)
+        button.backgroundColor = RedTheme().backgroundColor
+        button.addTarget(self, action: #selector(tap2), for: .touchUpInside)
+        return button
     }()
     
     private lazy var button3: UIButton = {
-        let button1 = UIButton()
-        button1.setTitle("Сменить на желтую тему", for: .normal)
-        button1.backgroundColor = YellowTheme().backgroundColor
-        button1.addTarget(self, action: #selector(tap3), for: .touchUpInside)
-        return button3
+        let button = UIButton()
+        button.setTitle("Сменить на желтую тему", for: .normal)
+        button.backgroundColor = YellowTheme().backgroundColor
+        button.addTarget(self, action: #selector(tap3), for: .touchUpInside)
+        return button
     }()
     
     init() {
@@ -60,7 +60,7 @@ final class ChangeThemeSubview: UIView{
             button1.centerXAnchor.constraint(equalTo: centerXAnchor),
             button1.centerYAnchor.constraint(equalTo: centerYAnchor),
             button1.heightAnchor.constraint(equalToConstant: 30),
-            button1.widthAnchor.constraint(equalToConstant: 15),
+            button1.widthAnchor.constraint(equalToConstant: 300),
             
             button2.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 20),
             button2.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -85,15 +85,22 @@ private extension ChangeThemeSubview{
     @objc func tap1(){
         Themes.currentTheme = BlueTheme()
         backgroundColor = Themes.currentTheme.backgroundColor
+        delegate?.updateColor()
     }
     
     @objc func tap2(){
-        Themes.currentTheme = BlueTheme()
+        Themes.currentTheme = RedTheme()
         backgroundColor = Themes.currentTheme.backgroundColor
+        delegate?.updateColor()
     }
     
     @objc func tap3(){
-        Themes.currentTheme = BlueTheme()
+        Themes.currentTheme = YellowTheme()
         backgroundColor = Themes.currentTheme.backgroundColor
+        delegate?.updateColor()
     }
+}
+
+#Preview{
+    ProfileView(isUser: true)
 }

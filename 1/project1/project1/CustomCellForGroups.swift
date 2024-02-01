@@ -23,7 +23,7 @@ class CustomCellForGroups: UITableViewCell{
         label2.backgroundColor = .white
         return label2
     }()
-
+    
     private var pictureInCell: UIImageView = {
         let pictureInCell = UIImageView()
         pictureInCell.backgroundColor = .red
