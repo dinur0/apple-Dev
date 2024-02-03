@@ -23,17 +23,10 @@ class ViewController: UIViewController{
         myWeb.navigationDelegate = self
         return myWeb
     }()
-    
-    
+
     private func setupUI() {
         view.addSubview(myWeb)
-        //            addConstrains()
     }
-    
-    //        private func addConstrains() {
-    //            NSLayoutConstraint.activate([
-    //            ])
-    //        }
 }
 private extension ViewController {
     func tap() {

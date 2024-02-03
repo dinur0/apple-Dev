@@ -9,11 +9,9 @@ import UIKit
 
 class ProfileView: UIViewController, ThemeDelegateProtocol{
     
-    
-    
-    
     private var model: Profile?
-    private let profileNet = NetworkServiceClass()
+//    private let profileNet = NetworkServiceClass()
+    private let profileNet = NetworkProtocol
     private var isUser: Bool
     private var themeColorView = ChangeThemeSubview() //HERE
     
@@ -51,7 +49,7 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
         setup()
         addConstraints()
         if isUser{
-            profileNet.showProfile{ [weak self] arrayOfProfile in
+            profileNet.showDownloadedDataFromURL{ [weak self] arrayOfProfile in
                 self?.model = arrayOfProfile.first
                 self?.updateValues(profileModel: arrayOfProfile.first!)
             }

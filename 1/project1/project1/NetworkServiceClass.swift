@@ -7,13 +7,17 @@
 
 import Foundation
 
-final class NetworkServiceClass {
+protocol NetworkProtocol: AnyObject{
+    func showDownloadedDataFromURL()
+}
+
+final class NetworkServiceClass: NetworkProtocol {
     
     private let thisSession = URLSession.shared
     
     static var networkToken = ""
     
-    func showFriends(handler: @escaping (Result<[Friend], Error>) -> Void){
+    func showDownloadedDataFromURL(handler: @escaping (Result<[Friend], Error>) -> Void){
         guard let url = URL(string: "https://api.vk.com/method/friends.get?fields=photo_100,online&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             handler(.failure(MyNetworkErrors.dataError))
@@ -40,7 +44,7 @@ final class NetworkServiceClass {
         }.resume()
     }
     
-    func showGroups(handler: @escaping (Result<[Group], Error>) -> Void){
+    func showDownloadedDataFromURL(handler: @escaping (Result<[Group], Error>) -> Void){
         guard let url = URL(string: "https://api.vk.com/method/groups.get?extended=1&count=3&fields=photo_50,description&access_token=\(NetworkServiceClass.networkToken)&v=5.131") // выводит 3 группы
         else {
             handler(.failure(MyNetworkErrors.dataError))
@@ -67,7 +71,7 @@ final class NetworkServiceClass {
         }.resume()
     }
     
-    func showPhotos(handler: @escaping ([Photo]) -> Void){
+    func showDownloadedDataFromURL(handler: @escaping ([Photo]) -> Void){
         guard let url = URL(string: "https://api.vk.com/method/photos.get?count=3&album_id=profile&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             return
@@ -88,7 +92,7 @@ final class NetworkServiceClass {
         }.resume()
     }
     
-    func showProfile(handler: @escaping ([Profile]) -> Void){
+    func showDownloadedDataFromURL(handler: @escaping ([Profile]) -> Void){
         guard let url=URL(string: "https://api.vk.com/method/users.get?fields=photo_400_orig&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             return

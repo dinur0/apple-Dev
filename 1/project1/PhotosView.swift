@@ -36,16 +36,13 @@ class PhotosView: UICollectionViewController{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "thisCell", for: indexPath) as? CustomCellPhotos else {
             return CustomCellPhotos()
         }
-//        return cell
-       
         let downloadedPhotos = model[indexPath.row]
         cell.updateValues(photosModel: downloadedPhotos)
         return cell
         }
     
 }
-/*
-*/
+
 extension PhotosView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

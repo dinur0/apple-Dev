@@ -43,10 +43,7 @@ final class FriendsView: UITableViewController{
             
         }
     }
-    
-    //    override func numberOfSections(in tableView: UITableView) -> Int {
-    //        5
-    //    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         model.count
     }
@@ -81,7 +78,7 @@ private extension FriendsView {
         animation.duration = 1
         navigationController?.view.layer.add(animation, forKey: nil)
         navigationController?.pushViewController(ProfileView(isUser: true), animated: false)
-        //        navigationController?.pushViewController(ProfileView, animated: false)
+
     }
 }
 //#Preview{

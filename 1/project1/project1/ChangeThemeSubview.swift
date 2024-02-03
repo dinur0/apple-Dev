@@ -101,6 +101,6 @@ private extension ChangeThemeSubview{
     }
 }
 
-#Preview{
-    ProfileView(isUser: true)
-}
+//#Preview{
+//    ProfileView(isUser: true)
+//}
