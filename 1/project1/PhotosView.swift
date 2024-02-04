@@ -11,10 +11,20 @@ class PhotosView: UICollectionViewController{
     
     private var model: [Photo] = []
     
-    private let photosNet = NetworkServiceClass()
+    private let photosNet: NetworkProtocol
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         model.count
+    }
+    
+    init(model: [Photo], photosNet: NetworkProtocol) {
+        self.model = model
+        self.photosNet = photosNet
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

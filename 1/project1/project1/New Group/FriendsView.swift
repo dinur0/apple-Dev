@@ -2,7 +2,7 @@ import UIKit
 
 final class FriendsView: UITableViewController{
     
-    private let netFriends = NetworkServiceClass()
+    private let netFriends: NetworkProtocol
     private var cache = CoreData()
     private var model: [Friend] = []
     
@@ -19,6 +19,18 @@ final class FriendsView: UITableViewController{
         refreshControl?.addTarget(self, action: #selector(downloadFriends), for: .valueChanged)
         downloadFriends()
         
+    }
+    
+    init(netFriends: NetworkProtocol, cache: CoreData = CoreData(), model: [Friend]) {
+        
+        self.netFriends = netFriends
+        self.cache = cache
+        self.model = model
+        super.init(nibName: nil, bundle: nil)//нужно ли?...
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc func downloadFriends(){
@@ -43,7 +55,7 @@ final class FriendsView: UITableViewController{
             
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         model.count
     }
@@ -78,7 +90,7 @@ private extension FriendsView {
         animation.duration = 1
         navigationController?.view.layer.add(animation, forKey: nil)
         navigationController?.pushViewController(ProfileView(isUser: true), animated: false)
-
+        
     }
 }
 //#Preview{

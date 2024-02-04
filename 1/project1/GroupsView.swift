@@ -4,7 +4,7 @@ class GroupsView: UITableViewController{
     
     private var model: [Group] = []
     private var cache = CoreData()
-    private let groupsNet = NetworkServiceClass()
+    private let groupsNet: NetworkProtocol
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,17 @@ class GroupsView: UITableViewController{
         let downloadedGroups = model[indexPath.row]
         cell.updateValues(groupsModel: downloadedGroups)
         return cell
+    }
+    
+    init(model: [Group], cache: CoreData = CoreData(), groupsNet: NetworkProtocol) {
+        self.model = model
+        self.cache = cache
+        self.groupsNet = groupsNet
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

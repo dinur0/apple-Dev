@@ -11,7 +11,7 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
     
     private var model: Profile?
 //    private let profileNet = NetworkServiceClass()
-    private let profileNet = NetworkProtocol
+    private var profileNet: NetworkProtocol
     private var isUser: Bool
     private var themeColorView = ChangeThemeSubview() //HERE
     
@@ -29,12 +29,15 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
         return image
     }()
     
-    init(name: String? = nil, photo: UIImage? = nil, isUser: Bool) {
+    init(name: String? = nil, photo: UIImage? = nil, isUser: Bool, profileNet: NetworkProtocol) {
+        
         self.isUser = isUser
+        self.profileNet = profileNet
         super.init(nibName: nil, bundle: nil)
         label.text = name
         image.image = photo
         themeColorView.delegate = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -49,7 +52,7 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
         setup()
         addConstraints()
         if isUser{
-            profileNet.showDownloadedDataFromURL{ [weak self] arrayOfProfile in
+            profileNet.showProfile{ [weak self] arrayOfProfile in
                 self?.model = arrayOfProfile.first
                 self?.updateValues(profileModel: arrayOfProfile.first!)
             }

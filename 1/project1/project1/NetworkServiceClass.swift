@@ -8,7 +8,10 @@
 import Foundation
 
 protocol NetworkProtocol: AnyObject{
-    func showDownloadedDataFromURL()
+    func showFriends(handler: @escaping (Result<[Friend], Error>) -> Void)
+    func showGroups(handler: @escaping (Result<[Group], Error>) -> Void)
+    func showPhotos(handler: @escaping ([Photo]) -> Void)
+    func showProfile(handler: @escaping ([Profile]) -> Void)
 }
 
 final class NetworkServiceClass: NetworkProtocol {
@@ -17,7 +20,7 @@ final class NetworkServiceClass: NetworkProtocol {
     
     static var networkToken = ""
     
-    func showDownloadedDataFromURL(handler: @escaping (Result<[Friend], Error>) -> Void){
+    func showFriends(handler: @escaping (Result<[Friend], Error>) -> Void){
         guard let url = URL(string: "https://api.vk.com/method/friends.get?fields=photo_100,online&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             handler(.failure(MyNetworkErrors.dataError))
@@ -44,7 +47,7 @@ final class NetworkServiceClass: NetworkProtocol {
         }.resume()
     }
     
-    func showDownloadedDataFromURL(handler: @escaping (Result<[Group], Error>) -> Void){
+    func showGroups(handler: @escaping (Result<[Group], Error>) -> Void){
         guard let url = URL(string: "https://api.vk.com/method/groups.get?extended=1&count=3&fields=photo_50,description&access_token=\(NetworkServiceClass.networkToken)&v=5.131") // выводит 3 группы
         else {
             handler(.failure(MyNetworkErrors.dataError))
@@ -71,7 +74,7 @@ final class NetworkServiceClass: NetworkProtocol {
         }.resume()
     }
     
-    func showDownloadedDataFromURL(handler: @escaping ([Photo]) -> Void){
+    func showPhotos(handler: @escaping ([Photo]) -> Void){
         guard let url = URL(string: "https://api.vk.com/method/photos.get?count=3&album_id=profile&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             return
@@ -92,7 +95,7 @@ final class NetworkServiceClass: NetworkProtocol {
         }.resume()
     }
     
-    func showDownloadedDataFromURL(handler: @escaping ([Profile]) -> Void){
+    func showProfile(handler: @escaping ([Profile]) -> Void){
         guard let url=URL(string: "https://api.vk.com/method/users.get?fields=photo_400_orig&access_token=\(NetworkServiceClass.networkToken)&v=5.131")
         else {
             return
