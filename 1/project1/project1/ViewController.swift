@@ -30,7 +30,7 @@ class ViewController: UIViewController{
 }
 private extension ViewController {
     func tap() {
-        let tab1 = UINavigationController(rootViewController: FriendsView())
+        let tab1 = UINavigationController(rootViewController: FriendsView()
         let tab2 = UINavigationController(rootViewController: GroupsView())
         let tab3 = UINavigationController(rootViewController: PhotosView(collectionViewLayout: UICollectionViewFlowLayout()))
         

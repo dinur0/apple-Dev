@@ -67,7 +67,7 @@ final class FriendsView: UITableViewController{
         let downloadedFriends = model[indexPath.row]
         cell.updateValues(friendsModel: downloadedFriends)
         cell.tap = { [weak self] text, photo in
-            self?.navigationController?.pushViewController(ProfileView(name: text, photo: photo, isUser: false), animated: true)
+            self?.navigationController?.pushViewController(ProfileView(name: text, photo: photo, isUser: false, profileNet: self!.netFriends), animated: true)
             
         }
         return cell
@@ -89,7 +89,7 @@ private extension FriendsView {
         animation.type = .fade
         animation.duration = 1
         navigationController?.view.layer.add(animation, forKey: nil)
-        navigationController?.pushViewController(ProfileView(isUser: true), animated: false)
+        navigationController?.pushViewController(ProfileView(isUser: true, profileNet: netFriends), animated: false)
         
     }
 }

@@ -30,14 +30,13 @@ class ProfileView: UIViewController, ThemeDelegateProtocol{
     }()
     
     init(name: String? = nil, photo: UIImage? = nil, isUser: Bool, profileNet: NetworkProtocol) {
-        
-        self.isUser = isUser
         self.profileNet = profileNet
+        self.isUser = isUser
         super.init(nibName: nil, bundle: nil)
         label.text = name
         image.image = photo
         themeColorView.delegate = self
-        
+
     }
     
     required init?(coder: NSCoder) {
