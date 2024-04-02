@@ -23,4 +23,9 @@ class DoctorsView: ObservableObject{
         }
     }.resume()
     }
+    
+//    mutating func concatenateSpecialization() {
+//            self.fullSpecialization = self.specialization.joined(separator: ", ")
+//        }
+//    }
 }

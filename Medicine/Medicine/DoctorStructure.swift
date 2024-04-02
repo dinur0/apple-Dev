@@ -22,14 +22,26 @@ struct Doctor: Decodable, Identifiable {
     var patronymic: String
     var lastName: String
     var genderLabel: String
-    var avatar: URL
+    var avatar: URL?
+    var specialization: [Specialization]
     
     enum CodingKeys: String,CodingKey {
         case id
+        case specialization
         case firstName = "first_name"
         case patronymic
         case lastName = "last_name"
         case genderLabel = "gender_label"
         case avatar
+    }
+}
+
+struct Specialization: Decodable, Identifiable {
+    var id: Int
+    var specializationName: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case specializationName = "name"
     }
 }

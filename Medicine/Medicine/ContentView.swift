@@ -13,19 +13,31 @@ struct ContentView: View {
     var viewModel = DoctorsView()
     
     var body: some View {
-        List (model) { model in
-            VStack {
-                Text(model.firstName)
-                Text("dfhdh")
+        NavigationStack {
+            List (model) { model in
+                
+             NavigationLink(destination: DoctorView(doctor: model), label: {
+                 HStack {
+                     AsyncImage(url: model.avatar)
+                     { image in image.resizable()
+                         .aspectRatio(contentMode: .fit) }
+                 placeholder: {
+                     ProgressView()
+                 }
+                 .frame(width: 50, height: 50)
+                 .cornerRadius(100)
+                     Text(model.firstName)
+                     Text(model.patronymic)
+                 }
+             })
+            }
+            .onAppear{
+                viewModel.downloadDoctors{ (model)
+                    in
+                    self.model = model
+                }
             }
         }
-        .onAppear{
-            viewModel.downloadDoctors{ (model)
-                in
-                self.model = model
-            }
-        }
-        
     }
 }
 
