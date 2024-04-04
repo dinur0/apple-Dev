@@ -1,21 +1,18 @@
-//
-//  File.swift
-//  Medicine
-//
-//  Created by хех on 01.04.2024.
-//
 
 import Foundation
 
 struct DoctorStructure: Decodable {
     let record: Record
 }
+
 struct Record: Decodable {
     let data: DataClass
 }
+
 struct DataClass: Decodable {
     let users: [Doctor]
 }
+
 struct Doctor: Decodable, Identifiable {
     var id: String
     var firstName: String
@@ -23,25 +20,26 @@ struct Doctor: Decodable, Identifiable {
     var lastName: String
     var genderLabel: String
     var avatar: URL?
-    var specialization: [Specialization]
-    
-    enum CodingKeys: String,CodingKey {
+    var price: Int
+    var rank: Int
+    var category: String
+    var specializations: [Specialization]
+
+    enum CodingKeys: String, CodingKey {
         case id
-        case specialization
         case firstName = "first_name"
         case patronymic
         case lastName = "last_name"
         case genderLabel = "gender_label"
         case avatar
+        case specializations = "specialization"
+        case price = "video_chat_price"
+        case rank
+        case category = "category_label"
     }
 }
 
 struct Specialization: Decodable, Identifiable {
     var id: Int
-    var specializationName: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case specializationName = "name"
-    }
+    var name: String
 }
